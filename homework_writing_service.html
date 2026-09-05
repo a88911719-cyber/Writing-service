@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homework Writing Service</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}
+.hero{background:linear-gradient(135deg,#315bea,#6b4de6);color:white;padding:42px 18px;text-align:center}
+.hero h1{margin:0 0 10px;font-size:32px}.hero p{margin:6px 0;font-size:18px}
+.card{max-width:650px;margin:24px auto;padding:24px;background:white;border-radius:18px;box-shadow:0 8px 28px #0001}
+h2{margin-top:0}.rate{background:#eef3ff;border-radius:12px;padding:15px;text-align:center;font-size:22px;font-weight:bold;margin-bottom:20px}
+label{display:block;margin:14px 0 7px;font-weight:bold}
+input,select,textarea{width:100%;padding:13px;border:1px solid #ccd3df;border-radius:10px;font-size:16px}
+textarea{min-height:90px;resize:vertical}
+.total{font-size:22px;font-weight:bold;margin:18px 0;text-align:center}
+button{width:100%;border:0;border-radius:11px;padding:15px;font-size:18px;font-weight:bold;cursor:pointer;background:#20b45b;color:white}
+.small{text-align:center;color:#657084;font-size:14px;margin-top:15px;line-height:1.6}
+footer{text-align:center;padding:25px;color:#657084}
+</style>
+</head>
+<body>
+<section class="hero">
+  <h1>📚 Homework Writing Service</h1>
+  <p>صاف اور خوبصورت handwriting میں homework لکھوائیں</p>
+  <p><b>صرف Rs. 10 فی صفحہ</b></p>
+</section>
+
+<div class="card">
+  <div class="rate">📝 1 Page = Rs. 10</div>
+  <h2>Homework کا Order دیں</h2>
+
+  <label>آپ کا نام</label>
+  <input id="name" placeholder="اپنا نام لکھیں">
+
+  <label>موبائل نمبر</label>
+  <input id="phone" placeholder="03XXXXXXXXX" inputmode="tel">
+
+  <label>Subject</label>
+  <select id="subject">
+    <option>Urdu</option><option>English</option><option>Maths</option>
+    <option>Science</option><option>Physics</option><option>Chemistry</option>
+    <option>Biology</option><option>Other</option>
+  </select>
+
+  <label>کتنے pages؟</label>
+  <input id="pages" type="number" min="1" value="1" oninput="calc()">
+
+  <div class="total">کل قیمت: Rs. <span id="total">10</span></div>
+
+  <label>Homework کی تفصیل</label>
+  <textarea id="details" placeholder="مثلاً Chapter 3 کے سوالات..."></textarea>
+
+  <label>Area / Address</label>
+  <input id="address" placeholder="اپنا area یا delivery address لکھیں">
+
+  <button onclick="sendOrder()">📱 WhatsApp پر Order بھیجیں</button>
+
+  <div class="small">
+    Order button دبانے سے WhatsApp کھلے گا اور آپ کی دی ہوئی معلومات message میں آ جائیں گی۔
+  </div>
+</div>
+
+<footer>
+  WhatsApp: 03003079379<br>
+  Homework Writing Service
+</footer>
+
+<script>
+function calc(){
+  let p=parseInt(document.getElementById('pages').value)||1;
+  if(p<1)p=1;
+  document.getElementById('total').textContent=p*10;
+}
+function sendOrder(){
+  const name=document.getElementById('name').value.trim();
+  const phone=document.getElementById('phone').value.trim();
+  const subject=document.getElementById('subject').value;
+  const pages=Math.max(1,parseInt(document.getElementById('pages').value)||1);
+  const details=document.getElementById('details').value.trim();
+  const address=document.getElementById('address').value.trim();
+
+  if(!name || !phone || !details){
+    alert('براہِ کرم نام، موبائل نمبر اور homework کی تفصیل مکمل کریں۔');
+    return;
+  }
+
+  const total=pages*10;
+  const msg =
+`السلام علیکم، مجھے homework لکھوانا ہے۔
+
+نام: ${name}
+موبائل: ${phone}
+Subject: ${subject}
+Pages: ${pages}
+کل قیمت: Rs. ${total}
+Homework کی تفصیل: ${details}
+Area/Address: ${address}`;
+
+  window.open('https://wa.me/923003079379?text='+encodeURIComponent(msg),'_blank');
+}
+calc();
+</script>
+</body>
+</html>
